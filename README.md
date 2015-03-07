@@ -6,7 +6,7 @@ A wrapper for morrisjs with toggle ability on all graphs
 # Usage example
 
 ```javascript
-var morris = MTA.Morris(
+var morrisWrapper = MTA.Morris(
     'Line',                          // Morris graph type
     'line-example',                  // Container id                
     [                                // Initial data array
