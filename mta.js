@@ -5,13 +5,13 @@
  */
 (function() {
 
-    var RTG = {};
+    var MTA = {};
 
-    if(!window.RTG) {
-        window.RTG = RTG;
+    if(!window.MTA) {
+        window.MTA = MTA;
     }
 
-    RTG.Morris = function(morrisGraphType, containerId, data, xkey, ykeys, labels, isSelectYKeys) {
+    MTA.Morris = function(morrisGraphType, containerId, data, xkey, ykeys, labels, isSelectYKeys) {
 
         if (!morrisGraphType || !containerId || !data || !xkey || !ykeys || !labels || !Morris) {
             return;
