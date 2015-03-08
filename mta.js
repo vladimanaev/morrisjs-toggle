@@ -11,37 +11,37 @@
         window.MTA = MTA;
     }
 
-    MTA.Line = function(containerId, data, xkey, ykeys, labels, drawSelectCheckBox) {
-        return constructor("Line", containerId, data, xkey, ykeys, labels, drawSelectCheckBox);
+    MTA.Line = function(morrisConfigObj, drawSelectCheckBox) {
+        return constructor("Line", morrisConfigObj, drawSelectCheckBox);
     };
 
-    MTA.Bar = function(containerId, data, xkey, ykeys, labels, isSelectYKeys) {
-        return constructor("Bar", containerId, data, xkey, ykeys, labels, isSelectYKeys);
+    MTA.Bar = function(morrisConfigObj, isSelectYKeys) {
+        return constructor("Bar", morrisConfigObj, isSelectYKeys);
     };
 
-    function constructor(morrisGraphType, containerId, data, xkey, ykeys, labels, drawSelectCheckBox) {
+    function constructor(morrisGraphType, morrisConfigObj, drawSelectCheckBox) {
 
-        if (!morrisGraphType || !containerId || !data || !xkey || !ykeys || !labels || !Morris) {
+        if (!morrisGraphType || !morrisConfigObj) {
+            console.log("Please make sure morris obj is correct");
             return;
         }
 
-        function Graph(morrisGraphType, containerId, data, xkey, ykeys, labels) {
-            this.container = document.querySelector("#" + containerId);
-            this.origData = data;
-            this.xkey = xkey;
-            this.origYKeys = ykeys;
-            this.displayedYKeys = ykeys;
-            this.labels = labels;
-            this.morris = Morris[morrisGraphType]({
-                element: containerId,
-                data: data,
-                xkey: xkey,
-                ykeys: ykeys,
-                labels: labels
-            });
+        if(!Morris) {
+            console.log("Missing morris.js");
+            return;
         }
 
-        var self = new Graph(morrisGraphType, containerId, data, xkey, ykeys, labels);
+        function Graph(morrisGraphType, morrisConfigObj) {
+            this.container = document.querySelector("#" + morrisConfigObj.element);
+            this.origData = morrisConfigObj.data;
+            this.xkey = morrisConfigObj.xkey;
+            this.origYKeys = morrisConfigObj.ykeys;
+            this.displayedYKeys = morrisConfigObj.ykeys;
+            this.labels = morrisConfigObj.labels;
+            this.morris = Morris[morrisGraphType](morrisConfigObj);
+        }
+
+        var self = new Graph(morrisGraphType, morrisConfigObj);
 
         Graph.prototype.initSelectYKeys = function () {
             var keys = self.origYKeys,
