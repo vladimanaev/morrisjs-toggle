@@ -11,7 +11,15 @@
         window.MTA = MTA;
     }
 
-    MTA.Morris = function(morrisGraphType, containerId, data, xkey, ykeys, labels, isSelectYKeys) {
+    MTA.Line = function(containerId, data, xkey, ykeys, labels, drawSelectCheckBox) {
+        return constructor("Line", containerId, data, xkey, ykeys, labels, drawSelectCheckBox);
+    };
+
+    MTA.Bar = function(containerId, data, xkey, ykeys, labels, isSelectYKeys) {
+        return constructor("Bar", containerId, data, xkey, ykeys, labels, isSelectYKeys);
+    };
+
+    function constructor(morrisGraphType, containerId, data, xkey, ykeys, labels, drawSelectCheckBox) {
 
         if (!morrisGraphType || !containerId || !data || !xkey || !ykeys || !labels || !Morris) {
             return;
@@ -37,8 +45,10 @@
 
         Graph.prototype.initSelectYKeys = function () {
             var keys = self.origYKeys,
-                buttonsContainer = document.createElement("div");
+                buttonsContainer = document.createElement("div"),
+                graphParentElem = this.container.parentNode;
             buttonsContainer.className = "buttonsContainer";
+            buttonsContainer.setAttribute("data-parent-graph", this.container.id);
 
             for (var keyIndex in keys) {
                 var currCheckBox = document.createElement('input'),
@@ -47,22 +57,30 @@
                 if (keys.hasOwnProperty(keyIndex)) {
                     currCheckBox.setAttribute("type", "checkbox");
                     currCheckBox.checked = true;
+                    currCheckBox.style.cursor = 'pointer';
+                    btnWrapper.style.cursor = 'pointer';
                     currCheckBox.setAttribute("data-key-name", keys[keyIndex]);
 
-                    currCheckBox.addEventListener("click", function () {
-                        var clickedKeyName = this.getAttribute("data-key-name");
+                    currCheckBox.addEventListener("change" , function() {
+                        var checkBox = this;
+                        checkBox.checked = !checkBox.checked;
+                    });
+
+                    btnWrapper.addEventListener("click", function () {
+                        var checkBoxElem = this.childNodes[0],
+                            clickedKeyName = checkBoxElem.getAttribute("data-key-name");
                         if (clickedKeyName) {
                             self.toggleYKeys(clickedKeyName);
+                            checkBoxElem.checked = !checkBoxElem.checked;
                         }
                     });
 
                     btnWrapper.appendChild(currCheckBox);
-                    btnWrapper.appendChild(document.createTextNode("Show " + keys[keyIndex]));
+                    btnWrapper.appendChild(document.createTextNode("Display " + keys[keyIndex]));
                     buttonsContainer.appendChild(btnWrapper);
                 }
             }
-
-            this.container.appendChild(buttonsContainer);
+            graphParentElem.insertBefore(buttonsContainer, this.container.nextSibling);
             this.buttonsContainer = buttonsContainer;
         };
 
@@ -138,7 +156,7 @@
             return resultObj;
         };
 
-        if (isSelectYKeys) {
+        if (drawSelectCheckBox) {
             self.initSelectYKeys();
         }
 
