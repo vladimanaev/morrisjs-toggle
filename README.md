@@ -7,8 +7,8 @@ A wrapper for morrisjs with toggle ability on all graphs
 
 Morris line graph example:
 ```javascript
-var morrisLineGraph = MTA.Line(
-    {   //Morris configuration obj
+var morrisLineGraph = MTA.Line({   
+        //Morris configuration obj
         element: 'mta_graph',
         data: [
             {year: '2006', a: 100, b: 90},
@@ -31,8 +31,8 @@ var morrisLineGraph = MTA.Line(
 
 Morris bar graph example:
 ```javascript
-var morrisLineGraph = MTA.Bar(
-    {   //Morris configuration obj
+var morrisLineGraph = MTA.Bar({
+        //Morris configuration obj
         element: 'mta_graph',
         data: [
             {year: '2006', a: 100, b: 90},
