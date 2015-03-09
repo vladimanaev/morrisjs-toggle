@@ -5,6 +5,12 @@ A wrapper for morrisjs with toggle ability on all graphs
 
 # Usage example
 
+Toggle ability example
+```javascript 
+var mtaObj = MTA.Line(...);
+mtaObj.toggleYKeys(['a','b']);
+```
+
 Morris line graph example:
 ```javascript
 var morrisLineGraph = MTA.Line({   
