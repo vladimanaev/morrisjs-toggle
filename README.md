@@ -14,7 +14,7 @@ mtaObj.toggleYKeys(['a','b']);
 
 Morris line graph example:
 ```javascript
-window.morrisLineGraph = MTA.Line({
+var morrisLineGraph = MTA.Line({
             //Morris configuration obj
             element: 'line_mta_graph',
             data: [
