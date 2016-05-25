@@ -37,7 +37,7 @@ var morrisLineGraph = MTA.Line({
 
 Morris bar graph example:
 ```javascript
-var morrisLineGraph = MTA.Bar({
+var morrisBarGraph = MTA.Bar({
         //Morris configuration obj
         element: 'mta_graph',
         data: [
