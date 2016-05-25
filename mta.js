@@ -15,8 +15,8 @@
         return constructor("Line", morrisConfigObj, drawSelectCheckBox);
     };
 
-    MTA.Bar = function(morrisConfigObj, isSelectYKeys) {
-        return constructor("Bar", morrisConfigObj, isSelectYKeys);
+    MTA.Bar = function(morrisConfigObj, drawSelectCheckBox) {
+        return constructor("Bar", morrisConfigObj, drawSelectCheckBox);
     };
 
     function constructor(morrisGraphType, morrisConfigObj, drawSelectCheckBox) {
