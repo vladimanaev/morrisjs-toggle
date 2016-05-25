@@ -1,7 +1,7 @@
 /**
  * Created by Vladi on 3/7/2015.
  * wrapper for http://morrisjs.github.io/morris.js/
- * version 1.0
+ * version 1.1
  */
 (function() {
 
@@ -95,6 +95,8 @@
         Graph.prototype.setData = function (data) {
             if (data && data.length > 0) {
                 this.morris.setData(data);
+                this.origData = data;
+                this.setYKeys(this.origYKeys);
             }
         };
 
@@ -124,7 +126,10 @@
         };
 
         Graph.prototype.setYKeys = function (yKeys) {
-            this.setData(this.filterData(this.origData, yKeys));
+            var data = this.filterData(this.origData, yKeys);
+            if (data && data.length > 0) {
+                this.morris.setData(data);
+            }
         };
 
         Graph.prototype.filterData = function (data, yKeysToShow) {
