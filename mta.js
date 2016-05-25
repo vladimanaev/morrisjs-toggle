@@ -19,6 +19,10 @@
         return constructor("Bar", morrisConfigObj, drawSelectCheckBox);
     };
 
+    MTA.Donut = function(morrisConfigObj) {
+        return constructor("Donut", morrisConfigObj, false);
+    };
+
     function constructor(morrisGraphType, morrisConfigObj, drawSelectCheckBox) {
 
         if (!morrisGraphType || !morrisConfigObj) {
@@ -90,6 +94,10 @@
 
         Graph.prototype.hide = function () {
             this.container.style.display = 'none';
+        };
+
+        Graph.prototype.getMorrisObj = function () {
+            return this.morris;
         };
 
         Graph.prototype.setData = function (data) {
