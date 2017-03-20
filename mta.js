@@ -1,7 +1,7 @@
 /**
  * Created by Vladi on 3/7/2015.
  * wrapper for http://morrisjs.github.io/morris.js/
- * version 1.1
+ * version 1.2
  */
 (function() {
 
@@ -74,7 +74,7 @@
                         var checkBoxElem = this.childNodes[0],
                             clickedKeyName = checkBoxElem.getAttribute("data-key-name");
                         if (clickedKeyName) {
-                            self.toggleYKeys(clickedKeyName);
+                            self.toggleYKeys(new Array(clickedKeyName));
                             checkBoxElem.checked = !checkBoxElem.checked;
                         }
                     });
